@@ -19,7 +19,7 @@ function App() {
        retrieveWord();
     }, []);
  
-   return <><Wheel/><Blanks word={word}/><Keyboard/><br/><Spin selection={selection} setSelection={setSelection}/></>;
+   return <><Wheel selected={selection}/><Blanks word={word}/><Keyboard/><br/><Spin selection={selection} setSelection={setSelection}/></>;
    
 }
 
