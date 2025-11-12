@@ -1,0 +1,8 @@
+.picker{
+    border-left:10px red transparent;
+    border-right:10px red transparent;
+    border-bottom:10px red transparent;
+    width:0;
+    height:0;
+    color:white; 
+}
