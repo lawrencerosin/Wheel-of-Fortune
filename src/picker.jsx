@@ -1,5 +1,5 @@
 import "./wheel.css";
 export default function Picker({money, color}){
    
-    return <div style={color} className="picker-text">{money}</div>;
+    return <span style={color} className="picker-text">{money}</span>;
 }

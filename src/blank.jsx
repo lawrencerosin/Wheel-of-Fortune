@@ -14,7 +14,7 @@
 }
 export default function Blanks({word}){
      
-    const blanks=asArray(word).map(function(){
+    const blanks=asArray(word.current).map(function(){
         return <Blank/>
     });
     return blanks;
