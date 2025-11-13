@@ -12,3 +12,4 @@ export class Choice{
         return choices;
     }
 }
+export const choices=Choice.setupChoices();
