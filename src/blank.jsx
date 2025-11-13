@@ -1,21 +1,19 @@
- function asArray(word){
-    const letters=[];
-    for(let letter of word)
-        letters.push(letter);
-    return letters;
- }
- function Blank(){
+ 
+ function Blank({letter}){
     const CSS={
         backgroundColor:"white",
-        width:"5px",
-        height:"10px"
+        width:"20px",
+        height:"30px",
+        display:"inline-block",
+        marginRight:"20px"
     }
-    return <span className={CSS}></span>
+    return <span style={CSS}>{letter}</span>
 }
-export default function Blanks({word}){
-     
-    const blanks=asArray(word.current).map(function(){
-        return <Blank/>
+export default function Blanks({ letters}){ 
+    console.log(letters.length);
+    const blanks=letters.map(function(letter){
+         
+        return <Blank letter={letter}/>
     });
-    return blanks;
+    return <nav>{blanks}</nav>;
 }

@@ -7,12 +7,18 @@ export default function Wheel({selected}){
         const selectedColor={...colorCommand};
         selectedColor["border"]="2px solid white";
         const picker="picker"+position;
+        function NewLine({color}){
+             if(position%5==0&&position>0)
+               return <><Picker key={picker} color={color}  money={choice.money}/><br/></>;
+             else
+               return <Picker key={picker} color={color}  money={choice.money}/>;
+        }
+        
         if(position==selected){
-            
-           return <Picker key={picker} color={selectedColor} border="true" money={choice.money}/>
+           return <NewLine color={selectedColor}/>
         }
         else
-            return <Picker key={picker} color={colorCommand} border="false" money={choice.money}/>
+            return <NewLine color={colorCommand}/>
     });
     return <div>{pickers}</div>;
 }

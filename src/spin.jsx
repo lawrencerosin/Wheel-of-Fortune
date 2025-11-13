@@ -6,5 +6,8 @@ export default function Spin({selection, setSelection}){
         setSelection((selection+change)%20);
         
     }
-    return <button onClick={spin}>Spin</button>
+    const CSS={
+        backgroundColor:"blue"
+    }
+    return <button style={CSS} onClick={spin}>Spin</button>
 }
