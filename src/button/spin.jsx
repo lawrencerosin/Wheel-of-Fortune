@@ -1,4 +1,4 @@
-
+ 
 export default function Spin({selection, setSelection}){
     function spin(event){
         event.preventDefault();
@@ -7,7 +7,7 @@ export default function Spin({selection, setSelection}){
         
     }
     const CSS={
-        backgroundColor:"blue"
+        backgroundColor:"yellow"
     }
     return <button style={CSS} onClick={spin}>Spin</button>
 }
