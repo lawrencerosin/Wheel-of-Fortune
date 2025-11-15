@@ -1,5 +1,5 @@
  import { useContext } from "react";
- import MoneyContext from "./game context";
+ import MoneyContext from "./context/game context";
 export default function CurrentMoney(){
     const [money, setMoney]=useContext(MoneyContext);
     const CSS={

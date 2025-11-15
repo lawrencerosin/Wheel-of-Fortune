@@ -1,11 +1,12 @@
 import {  Choice} from "../choice";
-import {useContext, useState} from "react";
-import GameContext from "../game context";
+import {useContext, useState, useEffect} from "react";
+import GameContext from "../context/game context";
+import ButtonContext from "../context/button context";
 export default function Key({letter, letters, word, setLetters,  potentialIndex, vowel}){
     const choices=Choice.setupChoices();
-    const [money, setMoney, buyingVowel]=useContext(GameContext);
+    const [money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter]=useContext(GameContext);
     const [used, setUsed]=useState(false);
-     
+    const [disabled, setDisabled]=useState(true);
     const CSS={
         backgroundColor:"lightgray",
         width:"50px",
@@ -24,15 +25,22 @@ export default function Key({letter, letters, word, setLetters,  potentialIndex,
             }
         }
         setLetters(filled);
-        //So it won't be reused, and it doesn't allow vowels to be selected unless buying a vowel
-        if(used||vowel&&!buyingVowel)
-          event.target.disabled="true";
-        else
-         event.target.disabled="false";
         if(exists){
              
           setMoney(money+choices[potentialIndex].money);
         }
+        setChoseLetter(true);
     }
-    return <button type="button" onClick={addLetter} style={CSS} >{letter}</button>;
+    
+    useEffect(function(){
+      
+         //So it won't be reused, and it doesn't allow vowels to be selected unless buying a vowel
+        if(used||(vowel&&!buyingVowel)||choseLetter)
+          setDisabled(true);
+        else
+         setDisabled(false);
+    }, [choseLetter, buyingVowel, used]);
+    return (
+              <button type="button" onClick={addLetter} style={CSS} disabled={disabled} >{letter}</button>
+          );
 }

@@ -12,7 +12,7 @@ export default function Keyboard({letters, setLetters, word, potentialIndex}){
        const keyName="key"+position;
        //Whether or not to add a line break
        if(position%10==0)
-         return <><Key key={keyName} vowel={isVowel(letter)} letter={letter} letters={letters} word={word} potentialIndex={potentialIndex} setLetters={setLetters}/><br/></>;
+         return <span key={keyName}><Key  vowel={isVowel(letter)} letter={letter} letters={letters} word={word} potentialIndex={potentialIndex} setLetters={setLetters}/><br/></span>;
        else
         return <Key key={keyName} letter={letter} vowel={isVowel(letter)} letters={letters} potentialIndex={potentialIndex} word={word} setLetters={setLetters}/>;
    });
