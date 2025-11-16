@@ -7,18 +7,15 @@ import Blanks from "./blanks/blanks";
 import './App.css'
 import Wheel from "./wheel";
 import Keyboard from "./keys/keyboard"; 
-import Complete from './complete';
+import Complete from './button/complete';
 import CurrentMoney from "./current money"; 
 import GameContext from "./context/game context";
-let [count, setCount]=new Array(2);
-function update(){
-  setCount(count+1);
-}
 function App() {
-    [count, setCount]=useState(0);
+    
     const [word, setWord]=useState("");
     const [selection, setSelection]=useState(0);
     const [letters, setLetters]=useState([]);
+    const [holdLetters, setHoldLetters]=useState([]);
     const [money, setMoney]=useState(0);
     const [buyingVowel, setBuyingVowel]=useState(false);
     const [spun, setSpun]=useState(false);
@@ -27,6 +24,7 @@ function App() {
     const [blank, setBlank]=useState(0);
     //To allow the selection state to change
     const [spinText, setSpinText]=useState("Get Ready to Spin");
+    console.log(mode+"mode");
     async function retrieveWord(){
        const wordAPI=await fetch("https://random-word-api.herokuapp.com/word");
        const words=await wordAPI.json();
@@ -45,7 +43,15 @@ function App() {
     }, []);
     
     
-   return <GameContext.Provider value={[money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter, spun, setSpun]}><Wheel selected={selection}/><Blanks letters={letters}/><Keyboard letters={letters} setLetters={setLetters} word={word} potentialIndex={selection} spinText={spinText} setSpinText={setSpinText}/><Spin selection={selection} setSelection={setSelection}  buttonText={spinText} setButtonText={setSpinText}/><BuyVowel setMode={setMode} /><Complete letters={letters} setMode={setMode} blank={blank} setBlank={setBlank}/><CurrentMoney money={money}/></GameContext.Provider>;
+   return (<GameContext.Provider value={[money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter, spun, setSpun]}>
+         <Wheel selected={selection}/>
+         <Blanks letters={letters}/>
+         <Keyboard blank={blank} setBlank={setBlank} letters={letters} setLetters={setLetters} holdLetters={holdLetters} setHoldLetters={setHoldLetters} word={word} potentialIndex={selection} spinText={spinText} setSpinText={setSpinText} mode={mode} setMode={setMode}/>
+         <Spin selection={selection} setSelection={setSelection}  buttonText={spinText} setButtonText={setSpinText}/>
+         <BuyVowel setMode={setMode} />
+         <Complete letters={letters} mode={mode} setMode={setMode} blank={blank} setBlank={setBlank} setHoldLetters={setHoldLetters} setChoseLetter={setChoseLetter}/>
+         <CurrentMoney money={money}/>
+      </GameContext.Provider>);
    
 }
 

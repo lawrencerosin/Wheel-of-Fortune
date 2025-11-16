@@ -12,9 +12,9 @@ export default function Keyboard(properties){
        const keyName="key"+position;
        //Whether or not to add a line break
        if(position%10==0)
-         return <span key={keyName}><Key  vowel={isVowel(letter)} letter={letter} letters={properties.letters} word={properties.word} potentialIndex={properties.potentialIndex} setLetters={properties.setLetters} setSpinText={properties.setSpinText}/><br/></span>;
+         return <span key={keyName}><Key blank={properties.blank} setBlank={properties.setBlank} vowel={isVowel(letter)} letter={letter} letters={properties.letters} holdLetters={properties.holdLetters} setHoldLetters={properties.setHoldLetters} word={properties.word} potentialIndex={properties.potentialIndex} setLetters={properties.setLetters} setSpinText={properties.setSpinText} mode={properties.mode} setMode={properties.setMode}/><br/></span>;
        else
-        return <Key key={keyName} letter={letter} vowel={isVowel(letter)} letters={properties.letters} potentialIndex={properties.potentialIndex} word={properties.word} setLetters={properties.setLetters} setSpinText={properties.setSpinText}/>;
+        return <Key key={keyName} blank={properties.blank} setBlank={properties.setBlank} letter={letter} holdLetters={properties.holdLetters} setHoldLetters={properties.setHoldLetters} vowel={isVowel(letter)} letters={properties.letters} potentialIndex={properties.potentialIndex} word={properties.word} setLetters={properties.setLetters} setSpinText={properties.setSpinText} mode={properties.mode} setMode={properties.setMode}/>;
    });
    return <div>{keys}</div>;
 }

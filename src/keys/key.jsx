@@ -1,7 +1,13 @@
 import {  choices} from "../choice";
 import {useContext, useState, useEffect} from "react";
 import GameContext from "../context/game context";
-
+import { nextBlank } from "../button/complete";
+function buildWord(letters){
+    let word="";
+    for(let letter of letters)
+        word+=letter;
+    return word;
+}
 export default function Key(properties){
      
     const [money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter, spun, setSpun]=useContext(GameContext);
@@ -15,6 +21,23 @@ export default function Key(properties){
     }
     function addLetter(event){
         
+         if(properties.mode=="complete"){
+            const newLetters=[...properties.letters];
+            newLetters[properties.blank]=event.target.textContent;
+            properties.setLetters(newLetters);
+            //if(properties.blank<properties.letters.length-1)
+            nextBlank(properties.letters, properties.setBlank, properties.blank);
+            if(properties.blank>=properties.letters.length-1){
+                if(buildWord(properties.letters)==properties.word)
+                    alert("You got it!");
+                else{
+                    properties.setLetters(properties.holdLetters);
+                    alert("Sorry. That was incorrect.");
+                }
+            }
+
+         }
+         else{
             const filled=[...properties.letters];
             let exists=false;
             
@@ -27,12 +50,13 @@ export default function Key(properties){
             }
             properties.setLetters(filled);
             if(exists){
-                console.log(choices[properties.potentialIndex].money);
+               
                setMoney(money+choices[properties.potentialIndex].money);
             }
             setChoseLetter(true);
             setSpun(false);
             properties.setSpinText("Get Ready to Spin");
+        }
         
     }
     

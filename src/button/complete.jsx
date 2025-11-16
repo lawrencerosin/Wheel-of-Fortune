@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import GameContext from "./context/game context";
+import GameContext from "../context/game context";
 export function nextBlank(letters, setBlank, start=0){
     for(let position=start; position<letters.length; position++){
        
@@ -11,15 +11,17 @@ export function nextBlank(letters, setBlank, start=0){
         }
     }
 }
-export default function Complete({letters, setMode, blank, setBlank}){
+export default function Complete(properties){
    
    const CSS={
         backgroundColor:"orange"
     }
     function complete(){
-        setMode("complete");
-        nextBlank(letters, setBlank);
-        console.log(blank);
+        properties.setMode("complete");
+        properties.setHoldLetters([...properties.letters]);
+        nextBlank(properties.letters, properties.setBlank);
+        properties.setChoseLetter(false);
+         
     }
     return <button type="button" style={CSS} onClick={complete}>Complete</button>
 }
