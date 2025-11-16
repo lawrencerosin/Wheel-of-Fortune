@@ -7,9 +7,11 @@ export function nextBlank(letters, setBlank, start=0){
            
             setBlank(position);
             //Avoids skipping the current blank
-            break;
+            return;
         }
     }
+    //If at the end, sets to the length of letters
+    setBlank(letters.length);
 }
 export default function Complete(properties){
    
@@ -21,7 +23,8 @@ export default function Complete(properties){
         properties.setHoldLetters([...properties.letters]);
         nextBlank(properties.letters, properties.setBlank);
         properties.setChoseLetter(false);
+        properties.setSpun(true);
          
     }
-    return <button type="button" style={CSS} onClick={complete}>Complete</button>
+    return <button type="button" style={CSS} disabled={properties.spun} onClick={complete}>Complete</button>
 }

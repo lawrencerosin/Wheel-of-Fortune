@@ -5,15 +5,15 @@ export default function BuyVowel({setMode}){
     
     function buy(event){
         if(money>=250&&!buyingVowel){
-            
+        
             setMoney(money-250);
             setChoseLetter(false);
             setBuyingVowel(true);
             setSpun(true);
             setMode("pick");
+            event.target.disabled=false;
         }
-        else
-            event.target.disabled=true;
+        
     }
     const CSS={
         backgroundColor:"blue"

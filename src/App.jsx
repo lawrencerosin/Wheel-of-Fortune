@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react' 
 import Spin from "./button/spin";
 import BuyVowel from "./button/buy vowel";
 import Blanks from "./blanks/blanks";
@@ -24,7 +22,6 @@ function App() {
     const [blank, setBlank]=useState(0);
     //To allow the selection state to change
     const [spinText, setSpinText]=useState("Get Ready to Spin");
-    console.log(mode+"mode");
     async function retrieveWord(){
        const wordAPI=await fetch("https://random-word-api.herokuapp.com/word");
        const words=await wordAPI.json();
@@ -41,15 +38,15 @@ function App() {
        retrieveWord();
 
     }, []);
-    
+    console.log(word);
     
    return (<GameContext.Provider value={[money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter, spun, setSpun]}>
          <Wheel selected={selection}/>
          <Blanks letters={letters}/>
-         <Keyboard blank={blank} setBlank={setBlank} letters={letters} setLetters={setLetters} holdLetters={holdLetters} setHoldLetters={setHoldLetters} word={word} potentialIndex={selection} spinText={spinText} setSpinText={setSpinText} mode={mode} setMode={setMode}/>
-         <Spin selection={selection} setSelection={setSelection}  buttonText={spinText} setButtonText={setSpinText}/>
+         <Keyboard blank={blank} setBlank={setBlank} letters={letters} setLetters={setLetters} holdLetters={holdLetters} setHoldLetters={setHoldLetters} word={word} potentialIndex={selection} spinText={spinText} setSpinText={setSpinText} setSpun={setSpun} mode={mode} setMode={setMode}/>
+         <Spin selection={selection} setSelection={setSelection}  buttonText={spinText} setButtonText={setSpinText} setMode={setMode}/>
          <BuyVowel setMode={setMode} />
-         <Complete letters={letters} mode={mode} setMode={setMode} blank={blank} setBlank={setBlank} setHoldLetters={setHoldLetters} setChoseLetter={setChoseLetter}/>
+         <Complete letters={letters} mode={mode} setMode={setMode} blank={blank} setBlank={setBlank} setHoldLetters={setHoldLetters} setChoseLetter={setChoseLetter} spun={spun} setSpun={setSpun}/>
          <CurrentMoney money={money}/>
       </GameContext.Provider>);
    
