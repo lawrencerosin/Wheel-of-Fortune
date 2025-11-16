@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import GameContext from "../context/game context";
-export default function BuyVowel(){
-    const [money, setMoney, buyingVowel, setBuyingVowel, choseLetter]=useContext(GameContext);
+export default function BuyVowel({setMode}){
+    const [money, setMoney, buyingVowel, setBuyingVowel, choseLetter, setChoseLetter, spun, setSpun]=useContext(GameContext);
     
     function buy(event){
         if(money>=250&&!buyingVowel){
             
             setMoney(money-250);
-          
+            setChoseLetter(false);
             setBuyingVowel(true);
+            setSpun(true);
+            setMode("pick");
         }
         else
             event.target.disabled=true;

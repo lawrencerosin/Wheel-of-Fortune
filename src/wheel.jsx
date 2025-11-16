@@ -1,5 +1,6 @@
-import {choices} from "./choice";
+ import { useEffect } from "react";
 import Picker from "./picker";
+import { choices } from "./choice";
 export default function Wheel({selected}){
   
     const pickers=choices.map(function(choice, position){
@@ -13,12 +14,13 @@ export default function Wheel({selected}){
              else
                return <Picker key={picker} color={color}  money={choice.money}/>;
         }
-        
+         
         if(position==selected){
            return <NewLine key={picker} color={selectedColor}/>
         }
         else
             return <NewLine key={picker} color={colorCommand}/>
+      ;
     });
-    return <div>{pickers}</div>;
+    return <div >{pickers}</div>;
 }

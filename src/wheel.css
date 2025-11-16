@@ -6,3 +6,27 @@
     height:0;
     color:white; 
 }
+#wheel{
+    border-radius:500px;
+    width:150px;
+    height:150px;
+    border:1px solid black;
+}
+.yellow-picker{
+    background-color:yellow;
+}
+.blue-picker{
+    background-color:blue;
+}
+.red-picker{
+    background-color:red;
+}
+.orange-picker{
+    background-color:orange;
+}
+.green-picker{
+    background-color:green;
+}
+.picker-text{
+    color:white;
+}
