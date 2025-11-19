@@ -81,11 +81,13 @@ async function open(){
     const file=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
     const fileContent=await file.json();
     console.log(fileContent);
-    const parts=fileContent["content"].split(",");
+   
     if(fileContent===null)
         alert("You do not have a file named "+name+".");
-    else
+    else{
+          const parts=fileContent["content"].split(",");
         write(parts);
+    }
 }
 async function saveAs(){ 
      kwl=document.getElementById("kwl");
