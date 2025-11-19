@@ -5,13 +5,13 @@ export default function SignIn(){
     const password=useRef("");
     async function signIn(event){
         event.preventDefault();
-        console.log("sign in");
+         
         const signInStatus=await fetch(`http://localhost:9000/signIn?email=${email.current.value}&password=${password.current.value}`,{
             method:"GET"
         });
         const parts=await signInStatus.json();
         if(parts.length>0){
-            sessionStorage.setItem("email", email);
+            sessionStorage.setItem("email", email.current.value);
             window.location.href="/";
         }
         else{

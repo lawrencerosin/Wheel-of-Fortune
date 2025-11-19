@@ -11,13 +11,18 @@ export default function CreateAccount(){
     }
     async function addAccount(event){
         event.preventDefault();
-        const result=await fetch(`/createAccount?firstName=${firstName.current.value}&lastName=${lastName.current.value}&email=${email.current.value}&firstPassword=${password.current.value}&secondPassword=${confirmPassword.current.value}`, 
+        const result=await fetch(`http://localhost:9000/createAccount?firstName=${firstName.current.value}&lastName=${lastName.current.value}&email=${email.current.value}&firstPassword=${password.current.value}&secondPassword=${confirmPassword.current.value}`, 
             {
                 method:"POST"
             }
         );
-       if(result=="Success")
+       const parts=await result.json();
+     
+       if(parts=="Success"){
          alert("You have successfully created your account.");
+         sessionStorage.setItem("email", email.current.value);
+         window.location.href="/";
+       }
     
     }
    
