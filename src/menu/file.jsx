@@ -40,7 +40,7 @@ function getChartContent(){
     const chart=new Array(3);
     for(let position1=0; position1<chart.length; position1++){
 
-      const list=kwl.children[position1].children[2].children;
+      const list=kwl.children[position1].children[1].children;
       chart[position1]=new Array(list.length-2);//Excludes button and break
       let cPosition=0;
       for(let position2=0; position2<list.length; position2++){
@@ -71,7 +71,7 @@ function write(parts, name){
        function(){
           alert("Unable to open file.");
        });
-       
+    
       
 }
 async function open(){
@@ -80,14 +80,26 @@ async function open(){
     const name=prompt("What file do you want to open?");
     const file=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
     const fileContent=await file.json();
-    console.log(fileContent);
    
     if(fileContent===null)
         alert("You do not have a file named "+name+".");
     else{
           const parts=fileContent["content"].split(",");
-        write(parts);
+        write(parts, name);
     }
+}
+async function save(){
+    try{
+        await fetch(`http://localhost:9000/save?email=${sessionStorage.getItem("email")}&name=${sessionStorage.getItem("name")}&content=${getChartContent()}`,
+         {  method:"PUT"}
+        );
+
+        alert("Successfully saved "+sessionStorage.getItem("name")+".");
+    }
+    catch(ex){
+        alert("Unable to save file.");
+    }
+    
 }
 async function saveAs(){ 
      kwl=document.getElementById("kwl");
@@ -102,14 +114,34 @@ async function saveAs(){
         );
     }
 }
+async function removeFile(){
+    const name=prompt("What file do you want to delete?");
+    
+    try{
+         const file=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
+         const parts=await file.json();
+         if(parts!==null){
+           await fetch(`http://localhost:9000/delete?email=${sessionStorage.getItem("email")}&name=${name}`, {
+            method:"DELETE"
+           }); 
+           alert("Successfully deleted "+name+".");
+        }
+        else{
+            alert("You don't have a file named "+name+".");
+        }
+    }
+    catch(ex){
+        alert(ex);
+    }
+}
 export default function File(){
-   const MENU=[new MenuOption("New", reset), new MenuOption("Open", open), new MenuOption("Save", null), 
-    new MenuOption("Save As", saveAs)];
+   const MENU=[new MenuOption("New", reset), new MenuOption("Open", open), new MenuOption("Save", save), 
+    new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
      
     const MENU_CSS={display:"none"};
     MENU_CSS["display"]="none";
     const choices=MENU.map(function(choice){
-         return <div onClick={choice.action} className="menu-option">{choice.name}</div>;
+         return <div onClick={choice.action} className="menu-option" key={choice.name}>{choice.name}</div>;
     });
-    return <span onClick={showOrHideMenu}><h3 className="menu-option" >File</h3><span style={MENU_CSS} onClick={hideMenu}>{choices}</span></span>;
+    return <><h3 className="menu-option" onClick={showOrHideMenu}>File</h3><span style={MENU_CSS} onClick={hideMenu}>{choices}</span></>;
 }
