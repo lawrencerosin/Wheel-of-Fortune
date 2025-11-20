@@ -16,14 +16,14 @@ export default function CreateAccount(){
                 method:"POST"
             }
         );
-       const parts=await result.json();
-     
-       if(parts=="Success"){
+        const parts=await result.json();
+        
+       if(result=="Success"){
          alert("You have successfully created your account.");
          sessionStorage.setItem("email", email.current.value);
          window.location.href="/";
        }
-    
+       console.log(parts);
     }
    
     return (

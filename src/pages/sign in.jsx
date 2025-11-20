@@ -9,8 +9,9 @@ export default function SignIn(){
         const signInStatus=await fetch(`http://localhost:9000/signIn?email=${email.current.value}&password=${password.current.value}`,{
             method:"GET"
         });
-        const parts=await signInStatus.json();
-        if(parts.length>0){
+       const parts=await signInStatus.json();
+    
+        if(parts!==null){
             sessionStorage.setItem("email", email.current.value);
             window.location.href="/";
         }
