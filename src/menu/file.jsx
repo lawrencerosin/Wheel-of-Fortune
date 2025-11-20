@@ -103,7 +103,7 @@ async function saveAs(){
     }
 }
 export default function File(){
-   const MENU=[new MenuOption("New", null), new MenuOption("Open", open), new MenuOption("Save", null), 
+   const MENU=[new MenuOption("New", reset), new MenuOption("Open", open), new MenuOption("Save", null), 
     new MenuOption("Save As", saveAs)];
      
     const MENU_CSS={display:"none"};
