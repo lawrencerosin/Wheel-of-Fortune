@@ -12,5 +12,9 @@ export function hideMenu(event){
 }
 export default function Menu(properties){
     const MENU_CSS={display:"none"};
-    return <div><h3 onClick={showOrHideMenu} className={properties.menuClass}>{properties.name}</h3><div onClick={hideMenu} style={MENU_CSS}>{properties.children}</div></div>
+    const MENU_TITLE_CSS={
+        marginRight:"10px",
+        textAlign:"center"
+    }
+    return <div><h3 onClick={showOrHideMenu} className={properties.menuClass} style={MENU_TITLE_CSS}>{properties.name}</h3><div onClick={hideMenu} style={MENU_CSS}>{properties.children}</div></div>
 }
