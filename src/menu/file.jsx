@@ -120,6 +120,9 @@ function viewFiles(){
         }
     });
 }
+function viewSharedFiles(){
+    window.location.href="/sharedFiles";
+}
 function save(){
     goToSignInPage(async function(){
         try{
@@ -177,7 +180,7 @@ async function removeFile(){
     
 export default function File(){
     
-    const OPTIONS=[new MenuOption("New", newFile), new MenuOption("Open", open), new MenuOption("View Files", viewFiles), new MenuOption("Save", save), new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
+    const OPTIONS=[new MenuOption("New", newFile), new MenuOption("Open", open), new MenuOption("View Files", viewFiles), new MenuOption("View Shared Files", viewSharedFiles), new MenuOption("Save", save), new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
     const choices=OPTIONS.map(function(choice){
          return <div onClick={choice.action} className="menu-option file-menu-option" key={choice.name}>{choice.name}</div>;
     });
