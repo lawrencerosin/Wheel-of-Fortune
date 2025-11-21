@@ -1,9 +1,10 @@
- import {useState} from "react";
+ 
  import Menu from "./menu";
+ export let visibility="Private";
 export default function Visibilities(){
-   const [visibility, setVisibility]=useState("Private");
+    
    function changeVisibility(event){
-      setVisibility(event.target.textContent);
+      visibility=event.target.textContent;
       event.target.style.backgroundColor="white";
       for(let current=event.target.previousElementSibling; current!==null; current=current.previousElementSibling)
         current.style.backgroundColor="lightgreen";

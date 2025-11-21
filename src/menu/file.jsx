@@ -1,7 +1,8 @@
 import MenuOption from "./menu option";
 import "./menu.css"; 
 import "../file.css";
-import Menu, {showOrHideMenu, hideMenu} from "./menu";
+import Menu from "./menu";
+import { visibility } from "./visibility";
 let kwl;
 
 function reset(){
@@ -122,7 +123,7 @@ function viewFiles(){
 function save(){
     goToSignInPage(async function(){
         try{
-            await fetch(`http://localhost:9000/save?email=${sessionStorage.getItem("email")}&name=${sessionStorage.getItem("name")}&content=${getChartContent()}`,
+            await fetch(`http://localhost:9000/save?email=${sessionStorage.getItem("email")}&name=${sessionStorage.getItem("name")}&content=${getChartContent()}&visibility=${visibility}`,
             {  method:"PUT"}
             );
 
@@ -141,8 +142,9 @@ function saveAs(){
             const name=prompt("What would you like to name the chart?");
             const matchingFiles=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
             const matchingParts=await matchingFiles.json();
-            if(matchingParts.length==0){
-                await fetch(`http://localhost:9000/saveAs?owner=${sessionStorage.getItem("email")}&name=${name}&content=${getChartContent()}`,
+          
+            if(matchingParts===null){
+                await fetch(`http://localhost:9000/saveAs?owner=${sessionStorage.getItem("email")}&name=${name}&content=${getChartContent()}&visibility=${visibility}`,
                 {  method:"POST"}
                 );
            }

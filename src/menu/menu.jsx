@@ -16,5 +16,5 @@ export default function Menu(properties){
         marginRight:"10px",
         textAlign:"center"
     }
-    return <div><h3 onClick={showOrHideMenu} className={properties.menuClass} style={MENU_TITLE_CSS}>{properties.name}</h3><div onClick={hideMenu} style={MENU_CSS}>{properties.children}</div></div>
+    return <div><h3 onClick={showOrHideMenu} className={properties.menuClass} style={MENU_TITLE_CSS}>{properties.name}</h3><span onClick={hideMenu} style={MENU_CSS}>{properties.children}</span></div>
 }
