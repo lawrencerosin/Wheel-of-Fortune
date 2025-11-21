@@ -1,7 +1,10 @@
 import { Link } from "react-router"
-export default function ChartPageLink(){
+export default function ChartPageSignInLink(){
     const CSS={
-      backgroundColor:"lightblue"
+      backgroundColor:"green",
+      color:"white",
+      width:"150px",
+      height:"50px"
     }
     function signOut(){
         sessionStorage.removeItem("username");

@@ -1,8 +1,11 @@
 import Chart from "../chart/chart";
-import ChartPageLink from "../links/chart page link";
+import ChartPageSignInLink from "../links/chart page sign in link";
 import Menubar from "../menu/menubar";
 import OpenedFile from "../opened file";
 import FileList from "../file list";
 export default function KWL(){
-    return <><Menubar/><OpenedFile/><ChartPageLink/><Chart/><FileList/></>;
+    const CSS={
+        backgroundColor:"orange"
+    };
+    return <div style={CSS}><Menubar/><OpenedFile/><ChartPageSignInLink/><Chart/><FileList/></div>;
 }

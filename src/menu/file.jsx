@@ -1,5 +1,6 @@
 import MenuOption from "./menu option";
 import "./menu.css"; 
+import "../file.css";
 import {showOrHideMenu, hideMenu} from "./menu";
 let kwl;
 
@@ -53,14 +54,16 @@ function getChartContent(){
   }
   return chart;
 }
-function write(parts, name){
+function read(parts, name){
       //To be put back
      // const oldFile=getChartContent();
-       reset();
+        
        const addItem=new Promise(function(success, fail){
-          for(let position=0; position<parts.length; position++){
-           
-            add(kwl.children[position%3].children[1], parts[position]);
+          for(let position1=0; position1<parts.length; position1++){
+            for(let position2=0; position2<parts[position1].length; position2++){
+                console.log(parts[position1].length);
+              add(kwl.children[position1].children[1], parts[position1][position2]);
+            }
           }
           success();
           fail();
@@ -74,45 +77,80 @@ function write(parts, name){
     
       
 }
-async function open(){
-     kwl=document.getElementById("kwl");
-    
-    const name=prompt("What file do you want to open?");
-    const file=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
-    const fileContent=await file.json();
-   
-    if(fileContent===null)
-        alert("You do not have a file named "+name+".");
-    else{
-          const parts=fileContent["content"].split(",");
-        write(parts, name);
-    }
+function goToSignInPage(callback){
+   if(sessionStorage.getItem("email")===null)
+      window.location.href="/signIn";
+   else
+      callback();
 }
-async function save(){
-    try{
-        await fetch(`http://localhost:9000/save?email=${sessionStorage.getItem("email")}&name=${sessionStorage.getItem("name")}&content=${getChartContent()}`,
-         {  method:"PUT"}
-        );
-
-        alert("Successfully saved "+sessionStorage.getItem("name")+".");
-    }
-    catch(ex){
-        alert("Unable to save file.");
-    }
-    
+function newFile(){
+    kwl=document.getElementById("kwl");
+    sessionStorage.removeItem("name");
+    reset();
 }
-async function saveAs(){ 
-     kwl=document.getElementById("kwl");
-    if(sessionStorage.getItem("email")===null){
-        window.location.href="/signIn";
-    }
-    else{
-        const name=prompt("What would you like to name the chart?");
+ function open(){
+    goToSignInPage(
+    async function(){
+        kwl=document.getElementById("kwl");
+        const name=prompt("What file do you want to open?");
+        const file=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
+        const fileContent=await file.json();
        
-        await fetch(`http://localhost:9000/saveAs?email=${sessionStorage.getItem("email")}&name=${name}&content=${getChartContent()}`,
-         {  method:"POST"}
-        );
-    }
+        if(fileContent===null)
+            alert("You do not have a file named "+name+".");
+        else{
+             reset();
+             read(fileContent["content"], name);
+        }
+  });
+}
+function viewFiles(){
+    goToSignInPage(async function(){
+        const files=await fetch("http://localhost:9000/viewFiles/"+sessionStorage.getItem("email"));
+        const fileList=await files.json();
+        const fileHolder=document.getElementById("files");
+        fileHolder.innerHTML="";
+        document.getElementById("fileBox").style.display="block";
+        for(let position=0; position<fileList.length; position++){
+            const item=document.createElement("li");
+            item.className="file-name";
+            item.textContent=fileList[position]["name"];
+            fileHolder.appendChild(item);
+        }
+    });
+}
+function save(){
+    goToSignInPage(async function(){
+        try{
+            await fetch(`http://localhost:9000/save?email=${sessionStorage.getItem("email")}&name=${sessionStorage.getItem("name")}&content=${getChartContent()}`,
+            {  method:"PUT"}
+            );
+
+            alert("Successfully saved "+sessionStorage.getItem("name")+".");
+        }
+        catch(ex){
+            alert("Unable to save file.");
+        }
+    });
+    
+}
+function saveAs(){ 
+     kwl=document.getElementById("kwl");
+      goToSignInPage(async function(){
+           
+            const name=prompt("What would you like to name the chart?");
+            const matchingFiles=await fetch(`http://localhost:9000/open?name=${name}&email=${sessionStorage.getItem("email")}`);
+            const matchingParts=await matchingFiles.json();
+            if(matchingParts.length==0){
+                await fetch(`http://localhost:9000/saveAs?owner=${sessionStorage.getItem("email")}&name=${name}&content=${getChartContent()}`,
+                {  method:"POST"}
+                );
+           }
+           else{
+            alert("You already have a file named "+name+". To overwrite it please open the file, and click \"Save\" in the File menu.");
+           }
+      }
+    );
 }
 async function removeFile(){
     const name=prompt("What file do you want to delete?");
@@ -131,17 +169,8 @@ async function removeFile(){
         }
     }
     catch(ex){
-        alert(ex);
+        alert("Unable to delete "+name+".");
     }
 }
-export default function File(){
-   const MENU=[new MenuOption("New", reset), new MenuOption("Open", open), new MenuOption("Save", save), 
+export const FILE_OPTIONS=[new MenuOption("New", newFile), new MenuOption("Open", open), new MenuOption("View Files", viewFiles), new MenuOption("Save", save), 
     new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
-     
-    const MENU_CSS={display:"none"};
-    MENU_CSS["display"]="none";
-    const choices=MENU.map(function(choice){
-         return <div onClick={choice.action} className="menu-option" key={choice.name}>{choice.name}</div>;
-    });
-    return <><h3 className="menu-option" onClick={showOrHideMenu}>File</h3><span style={MENU_CSS} onClick={hideMenu}>{choices}</span></>;
-}
