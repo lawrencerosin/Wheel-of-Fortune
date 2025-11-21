@@ -12,6 +12,9 @@ export default function Visibilities(){
       
    }
    const VISIBILITIES=["Private", "Shared", "Public"];
+   const VISIBILITY_CSS={
+     color:"white"
+   }
    const choices=VISIBILITIES.map(function(choice, position){
         const SELECTED={
           backgroundColor:"white"
@@ -24,5 +27,5 @@ export default function Visibilities(){
         else
           return <div className="visibility-menu-option menu-option" onClick={changeVisibility} style={NOT_SELECTED}>{choice}</div>
    });
-   return <Menu name="Visibility" menuClass="visibility-menu-option">{choices}</Menu>
+   return <><Menu name="Visibility" menuClass="visibility-menu-option">{choices}</Menu><h1 style={VISIBILITY_CSS}>{visibility}</h1></>;
 }
