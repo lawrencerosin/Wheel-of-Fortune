@@ -1,11 +1,11 @@
-import {FILE_OPTIONS} from "./file";
-import {VISIBILITY_OPTIONS} from "./visibility";
-import Menu from "./menu";
+import File from "./file";
+import Visibilities  from "./visibility";
+
 export default function Menubar(){
     const CSS={
         display:"flex",
         flexDirection:"row"
     }
     
-    return <nav style={CSS}><Menu name="File" options={FILE_OPTIONS}/></nav>;
+    return <nav style={CSS}><File/><Visibilities/></nav>;
 }

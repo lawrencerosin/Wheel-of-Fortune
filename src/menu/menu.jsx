@@ -7,13 +7,10 @@ export function showOrHideMenu(current){
         menu.style.display="block";
 }
 export function hideMenu(event){
+    event.stopPropagation();
     event.target.parentElement.style.display="none";
 }
-export default function Menu({name, options}){
+export default function Menu(properties){
     const MENU_CSS={display:"none"};
-    
-    const choices=options.map(function(choice){
-         return <div onClick={choice.action} className="menu-option" key={choice.name}>{choice.name}</div>;
-    });
-    return <><h3 className="menu-option" onClick={showOrHideMenu}>{name}</h3><span style={MENU_CSS} onClick={hideMenu}>{choices}</span></>;
+    return <div><h3 onClick={showOrHideMenu} className={properties.menuClass}>{properties.name}</h3><div onClick={hideMenu} style={MENU_CSS}>{properties.children}</div></div>
 }

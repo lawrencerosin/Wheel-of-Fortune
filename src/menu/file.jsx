@@ -1,7 +1,7 @@
 import MenuOption from "./menu option";
 import "./menu.css"; 
 import "../file.css";
-import {showOrHideMenu, hideMenu} from "./menu";
+import Menu, {showOrHideMenu, hideMenu} from "./menu";
 let kwl;
 
 function reset(){
@@ -172,5 +172,12 @@ async function removeFile(){
         alert("Unable to delete "+name+".");
     }
 }
-export const FILE_OPTIONS=[new MenuOption("New", newFile), new MenuOption("Open", open), new MenuOption("View Files", viewFiles), new MenuOption("Save", save), 
-    new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
+    
+export default function File(){
+    
+    const OPTIONS=[new MenuOption("New", newFile), new MenuOption("Open", open), new MenuOption("View Files", viewFiles), new MenuOption("Save", save), new MenuOption("Save As", saveAs), new MenuOption("Delete", removeFile)];
+    const choices=OPTIONS.map(function(choice){
+         return <div onClick={choice.action} className="menu-option file-menu-option" key={choice.name}>{choice.name}</div>;
+    });
+    return <Menu name="File"  menuClass="file-menu-option">{choices}</Menu>
+}

@@ -1,6 +1,13 @@
 .menu-option{
-    background-color:yellow;
+   
     border:1px solid black;
     width:100px;
     text-align:center;
 }
+.file-menu-option{
+   background-color:yellow;
+}
+.visibility-menu-option{
+   background-color:lightgreen;
+}
+ 
