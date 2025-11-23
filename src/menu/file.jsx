@@ -6,7 +6,8 @@ import "../file.css";
 import Menu from "./menu"; 
 import { Info } from "../pages/kwl";
 let kwl;
-function reset(){
+export function reset(){
+    kwl=document.getElementById("kwl");
     for(let position=0; position<kwl.children.length; position++){
          const list=kwl.children[position].children[1];
          while(list.children.length>1)
