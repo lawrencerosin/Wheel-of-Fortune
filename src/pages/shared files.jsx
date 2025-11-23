@@ -1,4 +1,4 @@
- import Chart from "../chart/chart";
+ import Chart from "../view/chart";
  import {useState} from "react";
 export default function SharedFiles(){
     let sharedFiles;
