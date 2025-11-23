@@ -6,10 +6,7 @@ import "../file.css";
 import Menu from "./menu"; 
 import { Info } from "../pages/kwl";
 let kwl;
-export default function File(){
-
-    const {visibility}=useContext(Info);
-    function reset(){
+function reset(){
     for(let position=0; position<kwl.children.length; position++){
          const list=kwl.children[position].children[1];
          while(list.children.length>1)
@@ -18,30 +15,29 @@ export default function File(){
   }
 
 
-    function add(column, content){
+function add(column, content){
     
-            const item=document.createElement("li");
-            const box=document.createElement("input");
-        //  box.contentEditable=true;
-            box.style.width="100px";
-            
-            box.value=content;
-            item.style.border="1px solid black";
-            const remove=document.createElement("button");
-            remove.textContent="Remove";
-            remove.style.backgroundColor="red";
-            remove.style.marginLeft="100px";
-            remove.addEventListener("click", function(){
-                item.parentElement.removeChild(item);
-            
-            });
-            item.appendChild(box);
-            item.appendChild(remove);
-            const buttons=column.getElementsByTagName("button");
-            
-            const addButton=buttons[buttons.length-1];//Is the last button
-            column.insertBefore( item, addButton);
-        }
+        const item=document.createElement("li");
+        const box=document.createElement("input");
+        box.style.width="100px";
+        
+        box.value=content;
+        item.style.border="1px solid black";
+        const remove=document.createElement("button");
+        remove.textContent="Remove";
+        remove.style.backgroundColor="red";
+        remove.style.marginLeft="100px";
+        remove.addEventListener("click", function(){
+            item.parentElement.removeChild(item);
+        
+        });
+        item.appendChild(box);
+        item.appendChild(remove);
+        const buttons=column.getElementsByTagName("button");
+        
+        const addButton=buttons[buttons.length-1];//Is the last button
+        column.insertBefore( item, addButton);
+    }
     function getChartContent(){ 
         let chart="";
         for(let position1=0; position1<kwl.children.length; position1++){
@@ -74,6 +70,7 @@ export default function File(){
             });
             addItem.then(function(){
                 sessionStorage.setItem("name", name);
+                console.log(name);
             },
         function(){
             alert("Unable to open file.");
@@ -82,11 +79,15 @@ export default function File(){
         
     }
     function goToSignInPage(callback){
-    if(sessionStorage.getItem("email")===null)
-        window.location.href="/signIn";
-    else
-        callback();
+        if(sessionStorage.getItem("email")===null)
+            window.location.href="/signIn";
+        else
+            callback();
     }
+export default function File(){
+
+    const {visibility}=useContext(Info);
+    
     function newFile(){
         kwl=document.getElementById("kwl");
         sessionStorage.removeItem("name");
@@ -106,7 +107,7 @@ export default function File(){
                 reset();
                 read(fileContent["content"], name);
             }
-    });
+       });
     }
     function viewFiles(){
         goToSignInPage(async function(){

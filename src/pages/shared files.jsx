@@ -15,8 +15,19 @@ export default function SharedFiles(){
             async function viewFile(){
                  const chart=await fetch("http://localhost:9000/viewChart/"+part._id);
                  const chartParts=await chart.json();
-                 console.log(chartParts);
-           }
+                 console.log(chartParts["content"].length);
+                 for(let position1=0; position1<chartParts["content"].length; position1++){
+                   for(let position2=0; position2<chartParts["content"].length; position2++){
+                        const item=document.createElement("li");
+                        item.style.border="1px solid black";
+                        item.textContent=chartParts["content"][position1][position2];
+                        const kwlColumn=document.getElementById("kwl").children[position1].children[1];
+                        kwlColumn.appendChild(item);
+                   }
+                 }
+                
+                
+             }
             return <li key={name} ><span style={ID_CSS}>{part._id}</span><span onClick={viewFile}>{part.name}</span></li>
         });
         setSharedFileList(fileList);
