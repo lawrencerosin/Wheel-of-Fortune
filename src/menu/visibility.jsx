@@ -1,10 +1,11 @@
- 
+ import { useContext, useEffect } from "react";
  import Menu from "./menu";
- export let visibility="Private";
+import { Info } from "../pages/kwl";
+export let holdVisibility;
 export default function Visibilities(){
-    
+   const {visibility, setVisibility}=useContext(Info);
    function changeVisibility(event){
-      visibility=event.target.textContent;
+      setVisibility(event.target.textContent);
       event.target.style.backgroundColor="white";
       for(let current=event.target.previousElementSibling; current!==null; current=current.previousElementSibling)
         current.style.backgroundColor="lightgreen";
@@ -12,6 +13,9 @@ export default function Visibilities(){
         current.style.backgroundColor="lightgreen";
       
    }
+   useEffect(function(){
+      holdVisibility=visibility;
+   }, [visibility]);
    const VISIBILITIES=["Private", "Shared", "Public"];
    const VISIBILITY_CSS={
      color:"white"

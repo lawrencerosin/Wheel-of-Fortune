@@ -1,27 +1,27 @@
- import {useState, useEffect } from "react";
+ import Chart from "../chart/chart";
+ import {useState} from "react";
 export default function SharedFiles(){
     let sharedFiles;
     let sharedFileParts=[];
      const[sharedFileList, setSharedFileList]=useState([]);
+   
     async function getShared(){
         sharedFiles=await fetch("http://localhost:9000/sharedCharts");
-         
+        
         sharedFileParts=await sharedFiles.json();
          const fileList=sharedFileParts.map(function(part, position){
             const name="file"+position;
-            
-            return <li key={name}><span>{part.id}</span><span>{part.name}</span></li>
+            const ID_CSS={display:"none"};
+            async function viewFile(){
+                 const chart=await fetch("http://localhost:9000/viewChart/"+part._id);
+                 const chartParts=await chart.json();
+                 console.log(chartParts);
+           }
+            return <li key={name} ><span style={ID_CSS}>{part._id}</span><span onClick={viewFile}>{part.name}</span></li>
         });
         setSharedFileList(fileList);
     }
     
-    useEffect(function(){
-        const fileList=sharedFileParts.map(function(part, position){
-            const name="file"+position;
-            
-            return <li key={name}><span>{part.id}</span><span>{part.name}</span></li>
-        });
-        
-    }, [sharedFileParts]);
-    return <><button onClick={getShared}>View Shared</button><ul>{sharedFileList}</ul></>;
+    getShared();
+    return <><ul>{sharedFileList}</ul><Chart/></>;
 }
