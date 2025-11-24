@@ -1,3 +1,9 @@
+function find(emails, email){
+    for(let position=0; position<emails.length; position++)
+        if(emails[position]==email)
+            return position;
+    return -1;
+}
 export default function Shared({shared, setShared}){
     const CSS={
         display:"none"
@@ -8,8 +14,16 @@ export default function Shared({shared, setShared}){
         shareCopy.push(sharee);
         setShared(shareCopy);
     }
+
     const emails=shared.map(function(email){
-        return <div><span>{email}</span><button>Remove</button></div>;
+        function removeShare(){
+          
+           const copiedShared=[...shared];
+            const emailLoc=find(copiedShared, email);
+           copiedShared.splice(emailLoc, 1);
+           setShared(copiedShared);
+        }
+        return <div><span>{email}</span><button onClick={removeShare}>Remove</button></div>;
     });
     return <div style={CSS}>{emails}<button onClick={shareChart}>Add</button></div>;
 }
