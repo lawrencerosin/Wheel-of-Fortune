@@ -1,5 +1,4 @@
- 
-export default function Column({title}){
+ export default function Column({title}){
      const TITLE_CSS={
       
         borderRight:"1px solid black",
@@ -9,7 +8,9 @@ export default function Column({title}){
         border:"1px solid black"
         
     }
-  
+    const COLUMN_CSS={
+        width:"100px"
+    }
  
-    return <div><h1 style={TITLE_CSS}>{title}</h1><ol style={LIST_CSS}><br/></ol></div>;
+    return <div style={COLUMN_CSS}><h1 style={TITLE_CSS}>{title}</h1><ol style={LIST_CSS}><br/></ol></div>;
 }

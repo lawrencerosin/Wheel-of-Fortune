@@ -10,7 +10,7 @@ export default function SignIn(){
             method:"GET"
         });
        const parts=await signInStatus.json();
-         console.log(parts);
+         
         if(parts!==null){
             sessionStorage.setItem("email", email.current.value);
             window.location.href="/";

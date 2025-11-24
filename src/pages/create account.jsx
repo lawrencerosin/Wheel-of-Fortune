@@ -21,13 +21,13 @@ export default function CreateAccount(){
     }
     async function addAccount(event){
         event.preventDefault();
-        const matchingEmails=await fetch(`http://localhost:9000/matchingEmails/${email.current.value}`);
+        const matchingEmails=await fetch(`http://localhost:9000/matchingEmails/${email.current.value.toLowerCase()}`);
         const matchingParts=await matchingEmails.json();
         if(password.current.value!=confirmPassword.current.value){
             alert("Your passwords aren't the same.");
         }
         else if(matchingParts.length==0){
-              const result=await fetch(`http://localhost:9000/createAccount?firstName=${firstName.current.value}&lastName=${lastName.current.value}&email=${email.current.value}&firstPassword=${password.current.value}&secondPassword=${confirmPassword.current.value}`, 
+              const result=await fetch(`http://localhost:9000/createAccount?firstName=${firstName.current.value}&lastName=${lastName.current.value}&email=${email.current.value.toLowerCase()}&firstPassword=${password.current.value}&secondPassword=${confirmPassword.current.value}`, 
                     {
                         method:"POST"
                     }

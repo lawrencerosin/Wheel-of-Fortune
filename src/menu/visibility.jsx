@@ -30,10 +30,16 @@ export default function Visibilities(){
         const NOT_SELECTED={
           backgroundColor:"lightgreen"
         };
+        const SHARED_CSS={
+          display:"flex",
+          flexDirection:"row"
+        };
+         
         if(position==0)
           return <div className="visibility-menu-option menu-option" onClick={changeVisibility} style={SELECTED}>{choice}</div>;
         else if(position==1)
-          return <><div className="visibility-menu-option menu-option" onClick={changeVisibility} onMouseEnter={showSubmenu} style={NOT_SELECTED}>{choice}</div><Shared shared={shared} setShared={setShared}/></>
+          return <nav style={SHARED_CSS}><div className="visibility-menu-option menu-option" onClick={changeVisibility} onMouseEnter={showSubmenu} style={NOT_SELECTED}>{choice}</div><Shared shared={shared} setShared={setShared}/></nav>
+        else  
           return <div className="visibility-menu-option menu-option" onClick={changeVisibility} style={NOT_SELECTED}>{choice}</div>
    });
    return <><Menu name="Visibility" menuClass="visibility-menu-option">{choices}</Menu><h1 style={VISIBILITY_CSS}>{visibility}</h1></>;
