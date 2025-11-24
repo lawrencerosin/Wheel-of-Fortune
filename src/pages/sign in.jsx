@@ -1,12 +1,13 @@
 import { Link } from "react-router"
 import { useRef } from "react";
 export default function SignIn(){
+     
     const email=useRef("");
     const password=useRef("");
     async function signIn(event){
         event.preventDefault();
          
-        const signInStatus=await fetch(`http://localhost:9000/signIn?email=${email.current.value}&password=${password.current.value}`,{
+        const signInStatus=await fetch(`http://localhost:9000/signIn?email=${email.current.value.toLowerCase()}&password=${password.current.value}`,{
             method:"GET"
         });
        const parts=await signInStatus.json();

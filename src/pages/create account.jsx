@@ -1,16 +1,18 @@
 import { Link } from "react-router";
 import { useRef } from "react";
+import setBodyColor from "../../body color";
 export default function CreateAccount(){
      const firstName=useRef("");
     const lastName=useRef("");
     const email=useRef("");
     const password=useRef("");
     const confirmPassword=useRef("");
+    setBodyColor("orange");
     const BUTTON_CSS={
         backgroundColor:"yellow"
     }
     const PAGE_CSS={
-        backgroundColor:"orange",
+        
        display:"flex",
        alignItems:"center",
        flexDirection:"column"
