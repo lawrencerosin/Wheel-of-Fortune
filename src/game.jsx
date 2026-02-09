@@ -13,9 +13,10 @@ export default function Game(){
        }
        let word="hello"
        const [orientation, setOrientation]=useState(0);
+       const [letters, setLetters]=useState(new Array(word.length));
        const [picker, setPicker]=useState(10);
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
-       return <><Wheel orientation={orientation} position={picker}/><br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker}/><Keyboard/><Blanks word={word}/></>
+       return <><Wheel orientation={orientation} position={picker}/><br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker}/><Keyboard letters={letters} setter={setLetters} word={word}/><Blanks word={word} letters={letters}/></>
        
 }
