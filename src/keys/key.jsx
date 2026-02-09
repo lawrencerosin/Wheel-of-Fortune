@@ -8,7 +8,7 @@ function buildWord(letters){
 }
 export default function Key(properties){
      
-    
+    const [used, setUsed]=useState(false);
     const CSS={
         backgroundColor:"lightgray",
         width:"50px",
@@ -22,8 +22,10 @@ export default function Key(properties){
             if(properties.word[position]==properties.letter)
                 newLetters[position]=properties.letter;
         }
-        properties.setter(newLetters);
+        properties.letterSetter(newLetters);
+        setUsed(true);
+        properties.spunSetter(false);
         
     }
-    return <button type="button" style={CSS} onClick={addLetter}>{properties.letter}</button>
+    return <button type="button" style={CSS} onClick={addLetter} disabled={used||!properties.spun}>{properties.letter}</button>
 }
