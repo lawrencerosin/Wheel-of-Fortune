@@ -3,8 +3,8 @@ export default function Blank({letter}){
         backgroundColor:"white",
         height:"10px",
         width:"5px",
-        paddingRight:"25px",
-        marginRight:"20px"
+        paddingRight:"20px",
+        marginRight:"25px"
     }
     return <span style={CSS}>{letter}</span>
 }

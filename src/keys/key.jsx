@@ -13,19 +13,28 @@ export default function Key(properties){
         backgroundColor:"lightgray",
         width:"50px",
         height:"50px",
-        marginRight:"5px"
+        marginRight:"2px"
     }
     function addLetter(){
-        const newLetters=[...properties.letters];
+        const updatedLetters=[...properties.letters];
+        let found=false;
         for(let position=0; position<properties.word.length; position++){
              
-            if(properties.word[position]==properties.letter)
-                newLetters[position]=properties.letter;
+            if(properties.word[position]==properties.letter){
+                updatedLetters[position]=properties.letter;
+                found=true;
+            }
         }
-        properties.letterSetter(newLetters);
+       
+        properties.letterSetter(updatedLetters);
         setUsed(true);
         properties.spunSetter(false);
-        
+        if(found){
+             const updatedCash=[...properties.cash];
+             updatedCash[properties.playerPosition]+=properties.money;
+             properties.cashSetter(updatedCash);
+        }
+        properties.playerSetter((properties.player+1)%properties.cash.length);
     }
     return <button type="button" style={CSS} onClick={addLetter} disabled={used||!properties.spun}>{properties.letter}</button>
 }
