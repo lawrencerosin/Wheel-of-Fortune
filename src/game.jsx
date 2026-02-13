@@ -5,9 +5,11 @@ import Keyboard from "./keys/keyboard"
 import { players } from "./global variables";
 import Blanks from "./blanks/blanks";
 import PotentialMoney from "./potential money";
+import MoneysOwned from "./moneys_owned";
 export default function Game(){
        function initializePlayersCash(){
-         const playersCash=new Array(players);
+       
+         const playersCash=new Array(parseInt(sessionStorage.getItem("players")));
          for(let position=0; position<playersCash.length; position++){
             playersCash[position]=0;
          }
@@ -21,6 +23,7 @@ export default function Game(){
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
        const [money, setMoney]=useState(10000);
-       return <><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} setSpun={setSpun} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition}/><Blanks word={word} letters={letters}/></>
+       alert(playersCash[0]);
+       return <><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} setSpun={setSpun} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition}/><Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/></>
        
 }
