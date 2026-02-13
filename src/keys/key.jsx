@@ -30,8 +30,9 @@ export default function Key(properties){
         setUsed(true);
         properties.spunSetter(false);
         if(found){
+            alert(properties.player);
              const updatedCash=[...properties.cash];
-             updatedCash[properties.playerPosition]+=properties.money;
+             updatedCash[properties.player]+=properties.money;
              properties.cashSetter(updatedCash);
         }
         properties.playerSetter((properties.player+1)%properties.cash.length);
