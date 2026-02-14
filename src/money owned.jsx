@@ -1,3 +1,4 @@
 export default function MoneyOwned({player,money}){
-    return <h1>Player {player} Money: {money}.00</h1>
+    const CSS={color:"white"}
+    return <h1 style={CSS}>Player {player} Money: {money}.00</h1>
 }

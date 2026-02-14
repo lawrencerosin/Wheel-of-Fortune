@@ -16,12 +16,17 @@ export default function Game(){
          return playersCash;
        }
       const [word, setWord]=useState("");
+      function forceSetup(){
+        if(sessionStorage.getItem("players")===null&&window.location.pathname!="/setup")
+          window.location.href="/setup";
+      }
        async function getWord(){
         const content=await fetch("https://random-word-api.herokuapp.com/word");
         const words=await content.json();
          setWord(words[0]);
          setLetters(new Array(word.length));
        } 
+       forceSetup();
        
        const [spun, setSpun]=useState(false);
        const [orientation, setOrientation]=useState(0);
@@ -30,6 +35,6 @@ export default function Game(){
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
        const [money, setMoney]=useState(10000); 
-       return <span onLoad={getWord}><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} setSpun={setSpun} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} money={money}/><Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/></span>
+       return <span onLoad={getWord}><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} spun={spun} setSpun={setSpun} money={money} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} money={money}/><Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/></span>
        
 }
