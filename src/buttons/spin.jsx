@@ -1,5 +1,5 @@
 import { getPotentialMoney, setupPickers } from "../money";
-export default function Spin({orientation, setOrientation, picker, setPicker, spun, setSpun, money, moneySetter}){
+export default function Spin({orientation, setOrientation, picker, setPicker, spun, setSpun, moneySetter, players, player, playerSetter}){
     function spin(){
         
          const spins=Math.floor(Math.random()*1000);
@@ -18,6 +18,9 @@ export default function Spin({orientation, setOrientation, picker, setPicker, sp
             moneySetter(getPotentialMoney(pickers, picker));
             if(getPotentialMoney(pickers, picker)>0)
               setSpun(true);
+            else{
+                playerSetter((player+1)%players);
+            }
         }, spins);
     }
     return <button type="button" onClick={spin} disabled={spun}>Spin</button>

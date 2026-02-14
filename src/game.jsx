@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Wheel from "./wheel";
 import Spin from "./buttons/spin"
-import Keyboard from "./keys/keyboard"
-import { players } from "./global variables";
+import Keyboard from "./keys/keyboard" 
+import PlayerTurn from "./player turn";
 import Blanks from "./blanks/blanks";
 import PotentialMoney from "./potential money";
 import MoneysOwned from "./moneys_owned"; 
@@ -35,6 +35,6 @@ export default function Game(){
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
        const [money, setMoney]=useState(10000); 
-       return <span onLoad={getWord}><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} spun={spun} setSpun={setSpun} money={money} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} money={money}/><Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/></span>
+       return <span onLoad={getWord}><Wheel orientation={orientation} position={picker} /><PotentialMoney money={money}/> <br/><PlayerTurn player={playerPosition}/><Spin orientation={orientation} setOrientation={setOrientation} picker={picker} setPicker={setPicker} spun={spun} setSpun={setSpun} players={playersCash} player={playerPosition} playerSetter={setPlayerPosition} moneySetter={setMoney}/><Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} money={money}/><Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/></span>
        
 }
