@@ -27,3 +27,16 @@ export function getPotentialMoney(pickers, position){
     else
     return pickers[position];
 }
+export function addCommas(money){
+    const moneyString=money+"";//Converts to string
+    let commaMoney="";
+    for(let position=moneyString.length-1; position>0; position--){
+        commaMoney=moneyString[position]+commaMoney;
+        if((moneyString.length-position-1)%3==2)
+            commaMoney=","+commaMoney;
+    }
+    //No comma before the last digit
+    commaMoney=moneyString[0]+commaMoney;
+    return commaMoney;
+
+}

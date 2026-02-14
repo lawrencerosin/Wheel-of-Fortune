@@ -1,16 +1,13 @@
 import Blank from "./blank";
 export default function Blanks({word, letters}){
-    function asArray(){
-       const letterArray=[];
-       for(let letter of letters)
-        letterArray.push(letter)
+ 
     
-      return letterArray;
-    }
-    
-    const spaces=asArray().map(function(letter, position){
+    const spaces=word.split("").map(function(letter, position){
         const name="blank"+position;
-        return <Blank key={name} letter={letter}/>
+        if(letters[position]===undefined)
+            return <Blank key={name} letter=""/>
+        else
+            return <Blank key={name} letter={letter}/>
     })
     return <div>{spaces}</div>
 }

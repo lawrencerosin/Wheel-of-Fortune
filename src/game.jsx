@@ -20,8 +20,9 @@ export default function Game(){
         const content=await fetch("https://random-word-api.herokuapp.com/word");
         const words=await content.json();
          setWord(words[0]);
+         setLetters(new Array(word.length));
        } 
-       console.log(word);
+       
        const [spun, setSpun]=useState(false);
        const [orientation, setOrientation]=useState(0);
        const [letters, setLetters]=useState(new Array(word.length));

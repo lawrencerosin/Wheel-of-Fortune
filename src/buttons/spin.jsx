@@ -1,6 +1,6 @@
 import { getPotentialMoney, setupPickers } from "../money";
 export default function Spin({orientation, setOrientation, picker, setPicker, setSpun, moneySetter}){
-    function spin(event){
+    function spin(){
         
          const spins=Math.floor(Math.random()*1000);
          setSpun(true);
