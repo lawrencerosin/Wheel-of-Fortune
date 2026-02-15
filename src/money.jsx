@@ -22,6 +22,7 @@ export function setupPickers(){
     return pickers;
 }
 export function getPotentialMoney(pickers, position){
+    
    if(typeof pickers[position]=="string")
       return 0;
     else

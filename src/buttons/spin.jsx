@@ -1,5 +1,5 @@
 import { getPotentialMoney, setupPickers } from "../money";
-export default function Spin({orientation, setOrientation, picker, setPicker, spun, setSpun, moneySetter, players, player, playerSetter}){
+export default function Spin({orientation, setOrientation, picker, setPicker, spun, setSpun, moneySetter, players, playersSetter, player, playerSetter}){
     function spin(){
         
          const spins=Math.floor(Math.random()*1000);
@@ -16,10 +16,16 @@ export default function Spin({orientation, setOrientation, picker, setPicker, sp
             clearInterval(spinner);
             
             moneySetter(getPotentialMoney(pickers, picker));
+
             if(getPotentialMoney(pickers, picker)>0)
               setSpun(true);
             else{
-                playerSetter((player+1)%players);
+                playerSetter((player+1)%players.length);
+                if(pickers[picker]=="Bankrupt"){
+                    const updatedMoney=[...players];
+                    updatedMoney[player]=0;
+                    playersSetter(updatedMoney);
+                }
             }
         }, spins);
     }
