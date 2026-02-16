@@ -3,7 +3,7 @@ export default function Spin({orientation, setOrientation, picker, setPicker, sp
     function spin(){
         
          const spins=Math.floor(Math.random()*1000);
-        
+         
          const spinner=setInterval(function(){
               setPicker((picker+1)%16);
               setOrientation((orientation+6.25)%360);//Avoids the numbers getting too high
@@ -28,6 +28,8 @@ export default function Spin({orientation, setOrientation, picker, setPicker, sp
                 }
             }
         }, spins);
+
     }
-    return <button type="button" onClick={spin} disabled={spun}>Spin</button>
+    const CSS={backgroundColor:"yellow"}
+    return <button type="button" style={CSS} onClick={spin} disabled={spun}>Spin</button>
 }
