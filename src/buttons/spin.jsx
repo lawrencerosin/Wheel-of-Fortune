@@ -16,10 +16,11 @@ export default function Spin({orientation, setOrientation, picker, setPicker, sp
             clearInterval(spinner);
             
             moneySetter(getPotentialMoney(pickers, picker));
-
+            
             if(getPotentialMoney(pickers, picker)>0)
               setSpun(true);
             else{
+                setSpun(false);
                 playerSetter((player+1)%players.length);
                 if(pickers[picker]=="Bankrupt"){
                     const updatedMoney=[...players];

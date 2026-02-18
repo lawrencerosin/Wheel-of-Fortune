@@ -1,12 +1,15 @@
-export default function BuyVowel({spun, spunSetter, buyingVowelSetter, players, playersSetter, position}){
+export default function BuyVowel({spun, spunSetter, mode, modeSetter, players, playersSetter, position}){
+    const VOWEL_PRICE=250;
     function buyVowel(){
-       buyingVowelSetter(true);
-       const money=[...players];
-       money[position]-=2000;
-       playersSetter(money);
-       spunSetter(true);
+      if(players[position]>=VOWEL_PRICE){
+        modeSetter("buying vowel");
+        const money=[...players];
+        money[position]-=VOWEL_PRICE;
+        playersSetter(money);
+        spunSetter(true);
+      }
     
     }
     const CSS={backgroundColor:"blue"}
-    return <button type="button" style={CSS} onClick={buyVowel} disabled={spun||players[position]<2000}>Buy a Vowel</button>
+    return <button type="button" style={CSS} onClick={buyVowel} disabled={spun}>Buy a Vowel</button>
 }

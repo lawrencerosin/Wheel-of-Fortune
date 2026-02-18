@@ -33,6 +33,7 @@ export default function Key(properties){
        
         properties.letterSetter(updatedLetters);
         setUsed(true);
+        properties.modeSetter("");
         properties.spunSetter(false);  
         if(found&&typeof pickers[properties.picker]=="number"&&!vowel){
            
@@ -43,5 +44,5 @@ export default function Key(properties){
       
         properties.playerSetter((properties.player+1)%properties.cash.length);
     }
-    return <button type="button" style={CSS} onClick={addLetter} disabled={used||!properties.spun||vowel&&!properties.buyingVowel}>{properties.letter}</button>
+    return <button type="button" style={CSS} onClick={addLetter} disabled={used||!properties.spun||vowel&&properties.mode!="buying vowel"&&properties.mode!="completing"}>{properties.letter}</button>
 }

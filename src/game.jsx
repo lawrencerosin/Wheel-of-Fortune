@@ -32,16 +32,17 @@ export default function Game(){
        const [orientation, setOrientation]=useState(0);
        const [letters, setLetters]=useState(new Array(word.length));
        const [picker, setPicker]=useState(10);
-       const [buyingVowel, setBuyingVowel]=useState(false);
+       const [mode, setMode]=useState("");
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
        const [money, setMoney]=useState(10000); 
        return (<span onLoad={getWord}>
         <Wheel orientation={orientation} position={picker} />
         <PotentialMoney picker={picker}/> <br/><PlayerTurn player={playerPosition}/>
-        <Buttons buyingVowelSetter={setBuyingVowel} orientation={orientation} orientationSetter={setOrientation} picker={picker} pickerSetter={setPicker} spun={spun} spunSetter={setSpun} players={playersCash} playersSetter={setPlayersCash} player={playerPosition} playerSetter={setPlayerPosition} moneySetter={setMoney} buyingVowel={buyingVowel}/>
-        <Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} picker={picker} buyingVowel={buyingVowel}/>
-        <Blanks word={word} letters={letters}/><MoneysOwned players={playersCash}/>
+        <Buttons orientation={orientation} orientationSetter={setOrientation} picker={picker} pickerSetter={setPicker} spun={spun} spunSetter={setSpun} players={playersCash} playersSetter={setPlayersCash} player={playerPosition} playerSetter={setPlayerPosition} moneySetter={setMoney} mode={mode} modeSetter={setMode}/>
+        <Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} picker={picker} mode={mode} modeSetter={setMode}/>
+        <Blanks word={word} letters={letters}/>
+        <MoneysOwned players={playersCash}/>
         </span>)
        
 }

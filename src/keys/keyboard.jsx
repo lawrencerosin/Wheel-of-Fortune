@@ -1,5 +1,5 @@
 import Key from "./key";
-export default function Keyboard({letters, letterSetter, word, spun, spunSetter, cash, cashSetter, picker, player, playerSetter, buyingVowel}){
+export default function Keyboard({letters, letterSetter, word, spun, spunSetter, cash, cashSetter, picker, player, playerSetter, mode, modeSetter}){
    function createAlphabet(){
      const alphabet=new Array(26);
      for(let position=0; position<alphabet.length; position++){
@@ -10,9 +10,9 @@ export default function Keyboard({letters, letterSetter, word, spun, spunSetter,
    const keys=createAlphabet().map(function(key, position){
           const name="key"+position;
           if(position>0&&position%10==0)
-            return <><Key letter={key} key={name}letters={letters} letterSetter={letterSetter} word={word} spun={spun} spunSetter={spunSetter} cash={cash} cashSetter={cashSetter} picker={picker} player={player} playerSetter={playerSetter} buyingVowel={buyingVowel}/><br/></>
+            return <><Key letter={key} key={name}letters={letters} letterSetter={letterSetter} word={word} spun={spun} spunSetter={spunSetter} cash={cash} cashSetter={cashSetter} picker={picker} player={player} playerSetter={playerSetter} mode={mode} modeSetter={modeSetter}/><br/></>
           else
-            return <Key letter={key} key={name} letters={letters} letterSetter={letterSetter} word={word} spun={spun} spunSetter={spunSetter} cash={cash} cashSetter={cashSetter} picker={picker} player={player} playerSetter={playerSetter} buyingVowel={buyingVowel}/>
+            return <Key letter={key} key={name} letters={letters} letterSetter={letterSetter} word={word} spun={spun} spunSetter={spunSetter} cash={cash} cashSetter={cashSetter} picker={picker} player={player} playerSetter={playerSetter} mode={mode} modeSetter={modeSetter}/>
    });
    return <div>{keys}</div>
 }
