@@ -17,7 +17,23 @@ export default function Key(properties){
         height:"50px",
         marginRight:"2px"
     }
-    
+    function addNextLetter(){
+        let position;
+        for(position=0; position<properties.letters.length&&properties.letters[position]!==undefined; position++);
+        if(position<properties.letters.length){
+            const updatedLetters=[...properties.letters];
+            updatedLetters[position]=properties.letter;
+            properties.lettersSetter(updatedLetters);
+        }
+        else if(buildWord(properties.letter)==word){
+            const updatedPlayers=[...properties.cash];
+            updatedPlayers[properties.player]+=10000000;
+            cashSetter(updatedPlayers);
+        }
+        else{
+            lettersSetter(properties.oldLetters);
+        }
+    }
     function addLetter(){
         const pickers=setupPickers();
         const updatedLetters=[...properties.letters];
@@ -44,5 +60,11 @@ export default function Key(properties){
       
         properties.playerSetter((properties.player+1)%properties.cash.length);
     }
-    return <button type="button" style={CSS} onClick={addLetter} disabled={used||!properties.spun||vowel&&properties.mode!="buying vowel"&&properties.mode!="completing"}>{properties.letter}</button>
+    function makeASelection(){
+        if(properties.mode=="completing")
+            addNextLetter();
+        else
+            addLetter();
+    }
+    return <button type="button" style={CSS} onClick={makeASelection} disabled={used||!properties.spun||vowel&&properties.mode!="buying vowel"&&properties.mode!="completing"}>{properties.letter}</button>
 }

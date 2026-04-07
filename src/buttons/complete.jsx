@@ -3,7 +3,7 @@ export default function Complete({spun, modeSetter, letters, oldLettersSetter}){
     
     function complete(){
       modeSetter("completing");
-      oldLettersSetter(letters);
+      oldLettersSetter([...letters]);
     }
     return <button style={CSS} disabled={spun} onClick={complete}>Complete</button>
 }
