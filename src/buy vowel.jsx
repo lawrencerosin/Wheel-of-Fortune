@@ -1,5 +1,5 @@
 export default function BuyVowel(spunSetter, mode, modeSetter, players, playersSetter, position}){
-    const NO_VOWEL_MAX=249;
+    const VOWEL_PRICE=2000;
     function buyVowel(){
      
         modeSetter("buying vowel");
@@ -11,5 +11,5 @@ export default function BuyVowel(spunSetter, mode, modeSetter, players, playersS
     
     }
     const CSS={backgroundColor:"blue"}
-    return <button type="button" style={CSS} onClick={buyVowel} disabled={mode=="spin"||mode==""||NO_VOWEL_MAX>players[position]}>Buy a Vowel</button>
+    return <button type="button" style={CSS} onClick={buyVowel} disabled={mode=="spin"||mode==""||player[position]<VOWEL_PRICE}>Buy a Vowel</button>
 }
