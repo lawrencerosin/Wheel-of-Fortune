@@ -66,5 +66,5 @@ export default function Key(properties){
         else
             addLetter();
     }
-    return <button type="button" style={CSS} onClick={makeASelection} disabled={used||!properties.spun||vowel&&properties.mode!="buying vowel"&&properties.mode!="completing"}>{properties.letter}</button>
+    return <button type="button" style={CSS} onClick={makeASelection} disabled={used||!properties.spun||vowel&&!properties.mode!="buying vowel"&&properties.mode!="completing"}>{properties.letter}</button>
 }

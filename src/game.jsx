@@ -28,7 +28,7 @@ export default function Game(){
        } 
        forceSetup();
        
-       const [spun, setSpun]=useState(false);
+       const [spinned, setSpinned]=useState(false);
        const [orientation, setOrientation]=useState(0);
        const [letters, setLetters]=useState(new Array(word.length));
        const [picker, setPicker]=useState(10);
@@ -36,13 +36,13 @@ export default function Game(){
        const [playersCash, setPlayersCash]=useState(initializePlayersCash());
        const [playerPosition, setPlayerPosition]=useState(0);
        const [money, setMoney]=useState(10000); 
-       return (<span onLoad={getWord}>
+       return (<div onLoad={getWord}>
         <Wheel orientation={orientation} position={picker} />
         <PotentialMoney picker={picker}/> <br/><PlayerTurn player={playerPosition}/>
         <Buttons orientation={orientation} orientationSetter={setOrientation} picker={picker} pickerSetter={setPicker} spun={spun} spunSetter={setSpun} players={playersCash} playersSetter={setPlayersCash} player={playerPosition} playerSetter={setPlayerPosition} moneySetter={setMoney} mode={mode} modeSetter={setMode}/>
         <Keyboard letters={letters} letterSetter={setLetters} cash={playersCash} cashSetter={setPlayersCash} spunSetter={setSpun} word={word} spun={spun} player={playerPosition} playerSetter={setPlayerPosition} picker={picker} mode={mode} modeSetter={setMode}/>
         <Blanks word={word} letters={letters}/>
         <MoneysOwned players={playersCash}/>
-        </span>)
+        </div>)
        
 }

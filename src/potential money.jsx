@@ -1,7 +1,7 @@
 import { addCommas, setupPickers } from "./money"
 export default function PotentialMoney({picker}){
     const CSS={
-        color:'white'
+        color:"white"
     }
     const pickers=setupPickers();
     if(typeof pickers[picker]=="string")

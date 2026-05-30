@@ -1,4 +1,4 @@
-export default function BuyVowel(spunSetter, mode, modeSetter, players, playersSetter, position}){
+export default function BuyVowel({spunSetter, mode, modeSetter, players, playersSetter, position}){
     const VOWEL_PRICE=2000;
     function buyVowel(){
      
